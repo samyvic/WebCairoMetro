@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Cairo Metro</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script> -->
+
+    <script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function () { null };
+    </script>
+  </head>
+  <body>
+    <div class="cover">
+      <div class="container">
+        <div class="row">
+          <div class="box-6 box-left">
+              <div class="form">
+                <h1>LOGIN</h1>
+                <br>
+
+                <input type="text" id="email" name="" placeholder="E-mail">
+                <input type="password" id="password" name="" placeholder="Password">
+                <br>
+                <input type="submit" id="submit" name="" value="ENTER">
+              </div>
+          </div>
+          <div class="box-6 box-right">
+              <h2>WELCOME TO</h2>
+              <img src="white-logo.png">
+              <h1>CAIRO METRO</h1>
+              <p>The Egyptian company for management and operation</p>
+
+              <div class="footer">
+                <div class="block b1">
+                    <p>ECM</p>
+                </div>
+                <div class="block b2">
+                    <p>2022</p>
+                </div>
+
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+    import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
+
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4BGSVyzZE1725rn4T1nQuRXSYp6N6MdE",
+      authDomain: "flutter-login-d65de.firebaseapp.com",
+      databaseURL: "https://flutter-login-d65de-default-rtdb.firebaseio.com",
+      projectId: "flutter-login-d65de",
+      storageBucket: "flutter-login-d65de.appspot.com",
+      messagingSenderId: "677870289140",
+      appId: "1:677870289140:web:5236e24ebdac5a4413dea1",
+      measurementId: "G-FCCWWBCY9F"
+    };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const database = getDatabase(app);
+      const auth = getAuth();
+
+
+      //LOGIN
+      submit.addEventListener('click', (e)=>{
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        //var dbInsert = firebase.database().ref().push().child('email').set(email);
+
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            const dt = new Date();
+            update(ref(database, 'users/' + user.uid),{
+              last_login_date: dt,
+            })
+            alert('Admin Logged In Successfully!');
+            location.replace("tickets.html")
+
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+          });
+      });
+
+      //write bakr
+      document.getElementById("submit").addEventListener('click',function writeUserData(email){
+        email = document.getElementById("email").value
+
+        set(ref(database, 'admins/'), {
+          email: email,
+          name: "bakr",
+        });
+      })
+
+    </script>
+    <!-- <script src="main.js"> </script>  -->
+  </body>
+</html>

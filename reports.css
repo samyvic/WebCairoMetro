@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:0;
+  font-family: 'Raleway', sans-serif;
+  font-feature-settings: 'lnum' 1;
+  /*background:#fff;*/
+  text-align:center;
+  background-color: #ffffe6;
+}
+.row{
+  width: 100%;
+}
+.cover .row::after{
+  content:"";
+  clear:both;
+  display:table;
+}
+.cover .container{
+  background-color: #ffffe6;
+}
+.cover .menu{
+  width: 20%;
+  height: 100vh;
+  background-color: #00AD95; /*turquoise*/
+  color: white;
+  position: fixed;
+  float: left;
+  border-top-right-radius: 50px;
+}
+.cover .avatar{
+  background-color: #00917C;
+  padding: 30px 0 20px;
+  border-top-right-radius: 50px;
+  font-weight: bolder;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 230,0.5);
+}
+.cover .avatar img{
+  width: 40%;
+  border: 2px solid #ffffe6;
+  border-radius: 50%;
+}
+.cover .avatar h2{
+  margin: 0;
+}
+.cover ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: justify;
+}
+.cover ul a{
+  text-decoration:none;
+  color: inherit;
+}
+.cover .menu ul li{
+  padding: 10px 50px;
+  cursor: pointer;
+}
+.cover .menu ul li:hover{
+  background-color: #00917C;
+}
+.cover .menu ul li i{
+  padding: 8px;
+}
+.cover .menu ul #active{
+  background-color: #ffffe6;
+  color: #00AD95;
+}
+.cover .content{
+  background-color: #ffffe6; /* off white*/
+  width: 80%;
+  float: right;
+  text-align: justify;
+  padding: 40px 50px;
+}
+.cover .content h1{
+  margin-top: 0;
+}
+.cover .content span{
+  color: grey;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.cover .report-nav-bar{
+    height: 70px;
+    background: #00AD95;
+    color: #ffffe6;
+}
+.cover .report-nav-bar ul{
+  height: inherit;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+  display: table;
+}
+.cover .report-nav-bar ul li{
+  height: inherit;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+}
+.report-nav-bar ul li.active{
+  background-color: #00917C;
+}
+.report-nav-bar ul li:hover{
+  background-color: #00917C;
+}
+.cover .report{
+  padding: 20px 40px;
+}
+.cover .report .card{
+  background-color: #E85110; /*orange*/
+  padding: 24px 35px;
+  width: 30%;
+  text-align: center;
+  color: #ffffe6;
+  border-radius: 5px;
+  float: left;
+  margin-right: 3.33%;
+  box-shadow: 10px 10px 24px rgb(72 73 121 / 15%);
+}
+.cover .report .card h1{
+  font-size: 55px;
+  line-height: 100px;
+  margin: 0;
+}
+.cover canvas{
+  padding: 10px;
+  box-shadow: 10px 10px 24px rgb(72 73 121 / 15%);
+  display: block;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.cover #table, .cover #issue-table{
+  width: 100%;
+  text-align: center;
+  box-shadow: 10px 10px 24px rgb(72 73 121 / 15%);
+  color: #00AD95;
+    font-weight: bold;
+}
+.cover #table caption, .cover #issue-table caption{
+  color: black;
+  font-size: 26px;
+  margin: 20px;
+}
+.cover #table tr, .cover #issue-table tr{
+  background-color: #ffffe6;
+  box-shadow: 10px 10px 24px rgb(72 73 121 / 15%);
+}
+.cover #table tr:hover, .cover #issue-table tr:hover{
+  background-color: rgba(255, 255, 230,0);
+}
+.cover #table th, .cover #issue-table th{
+  font-size: 18px;
+  padding: 10px;
+}
+.cover #table td, .cover #issue-table td{
+  font-size: 14px;
+  padding: 10px;
+}
+.cover #table th:nth-child(odd), .cover #issue-table th:nth-child(odd){
+  width: 10%;
+  font-weight: bold;
+}
+
+.cover #table td:nth-child(even), .cover #issue-table td:nth-child(even){
+  text-align: left;
+}
+.select-period, .select-timeDate{
+  text-align: center;
+  padding: 0px 0px 25px;
+  position: relative;
+}
+.select-period button, #passengers{
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: #00AD95; /* turquoise */
+  background-color: #ffffe6;
+  border: 3px solid #00AD95;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: block;
+}
+.select-period button:hover ,#passengers:hover{
+  background-color: #00AD95; /* turquoise */
+  color: white;
+}
+
+
+.cover .report-contents input[type=text]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.cover .select-period p{
+  display: inline-block;
+  width:48%;
+}
+
+.cover .select-timeDate p{
+  display: inline-block;
+  width:30.33%;
+  margin: 0 1.5%;
+}

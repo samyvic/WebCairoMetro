@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reports | Cairo Metro</title>
+    <!-- <link rel="stylesheet" href="main.css"> -->
+    <link rel="stylesheet" href="reports.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
+
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#search").click(function() {
+          // $('#myChart-tick-2').hide(),$('#pieChart-tick-2').hide(),$('#myChart-tick-3').hide(),$('#pieChart-tick-3').hide(),
+          $('#myChart-tick-1').show(),$('#pieChart-tick-1').show()
+        });
+        // $("#lWeek").click(function() {
+        //   $('#myChart-tick-1').hide(),$('#pieChart-tick-1').hide(),$('#myChart-tick-3').hide(),$('#pieChart-tick-3').hide(),
+        //   $('#myChart-tick-2').show(),$('#pieChart-tick-2').show()
+        // });
+        // $("#lMonth").click(function() {
+        //   $('#myChart-tick-1').hide(),$('#pieChart-tick-1').hide(),$('#myChart-tick-2').hide(),$('#pieChart-tick-2').hide(),
+        //   $('#myChart-tick-3').show(),$('#pieChart-tick-3').show()
+        // });
+      });
+    </script>
+
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <!-- <script>
+      console.log(dayjs('2019-01-25').unix());
+    </script> -->
+
+
+
+    <!-- Start calender -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <!-- <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script> -->
+
+  <script>
+    $( function() {
+      $( "#startDatePicker" ).datepicker({
+        buttonImageOnly: true,
+        dateFormat: "yy-mm-dd",
+        buttonText: "Select date"
+      });
+      $( "#endDatePicker" ).datepicker({
+        buttonImageOnly: true,
+        dateFormat: "yy-mm-dd",
+        buttonText: "Select date"
+      });
+      // let date = $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+      // console.log(date);
+      $('#startDatePicker').datepicker()
+      .on("input change", function (e) {
+      // console.log("Date changed: ", e.target.value);
+      let x = e.target.value;
+      // console.log(x);
+      // console.log(dayjs(x).unix());
+      $('#starttt').text(dayjs(x).unix());
+      });
+      $('#endDatePicker').datepicker()
+      .on("input change", function (e) {
+      // console.log("Date changed: ", e.target.value);
+      let x = e.target.value;
+      // console.log(x);
+      // console.log(dayjs(x).unix());
+      $('#enddd').text(dayjs(x).unix());
+      });
+
+      // $('#startDateTime').flatpickr()
+      // .on("input change", function (e) {
+      // // console.log("Date changed: ", e.target.value);
+      // let x = e.target.value;
+      // // console.log(x);
+      // // console.log(dayjs(x).unix());
+      // $('#timeDate1').text(dayjs(x).unix());
+      // });
+
+
+      // $('#endDateTime').flatpickr()
+      // .on("input change", function (e) {
+      // // console.log("Date changed: ", e.target.value);
+      // let x = e.target.value;
+      // // console.log(x);
+      // // console.log(dayjs(x).unix());
+      // $('#timeDate2').text(dayjs(x).unix());
+      // });
+
+
+    });
+
+  </script>
+
+
+
+
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> -->
+
+<!-- <script type="text/javascript">
+    $(function() {
+            let start = $("#startdate").datepicker({ dateFormat: "dd-mm-yy" });
+            let end = $("#enddate").datepicker({ dateFormat: "dd-mm-yy" }).val();
+
+    });
+
+
+</script> -->
+
+
+  <!-- End calender -->
+<link rel="stylesheet" href="jquery.datetimepicker.min.css">
+<!-- <script src="jquery.js"></script> -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#timeDate1").datetimepicker({format: 'd M Y h:i A'});
+      $("#timeDate1").on('change', function(e){
+        let x = e.target.value;
+        $('#firstTD').text(dayjs(x).unix());
+      })
+
+      $("#timeDate2").datetimepicker({format: 'd M Y h:i A'});
+      $("#timeDate2").on('change', function(e){
+        let x = e.target.value;
+        $('#secondTD').text(dayjs(x).unix());
+      })
+    })
+  </script>
+
+  <script src="jquery.datetimepicker.full.js" type="text/javascript"></script>
+
+
+  </head>
+  <body>
+    <div class="cover">
+      <div class="container">
+        <div class="row">
+
+          <div class="menu" id="menu">
+            <div class="avatar">
+              <img src="avatar.jpeg" alt="">
+              <p>Admin</p>
+              <h2>SAMY</h2>
+            </div>
+            <ul class="list">
+              <!-- <a href="dashboard.html"><li><i class="fas fa-home"></i> Dashboard</li></a> -->
+              <a href="tickets.html"><li><i class="fas fa-ticket-alt"></i> Tickets</li></a>
+              <a href="stations.html"><li><i class="fas fa-subway"></i> Stations</li></a>
+              <a href="subs.html"><li><i class="fas fa-money-check-alt"></i> Subscriptions</li></a>
+              <!-- <a href="tickets.html"><li id="ticket"><i class="fas fa-ticket-alt"></i> Tickets</li></a> -->
+              <!-- <a href="fines.html"><li><i class="fas fa-receipt"></i> Fines</li></a> -->
+              <li id="active"><i class="fas fa-chart-pie"></i> Reports</li>
+              <a href="index.html"><li><i class="fas fa-sign-out-alt"></i> Log Out</li></a>
+            </ul>
+          </div>
+
+          <div class="content">
+            <h1>Reports <span>Statistics</span></h1>
+            <div class="report-nav-bar">
+              <ul>
+                <li onclick="openReport('ticks')">Tickets</li>
+                <li onclick="openReport('subs')">Subscriptions</li>
+                <li onclick="openReport('users')">Users</li>
+                <li onclick="openReport('station')">Stations</li>
+                <li onclick="openReport('issues')">Issues</li>
+                <li onclick="openReport('feeds')">Feedback</li>
+              </ul>
+            </div>
+
+            <div class="report-contents">
+
+              <div class="tickets-content report" id="ticks">
+
+                <h2>Tickets Statistics</h2>
+                <div class="select-period">
+
+                  <!-- <button type="button" name="button" id="lWeek" >Last Week</button>
+                  <button type="button" name="button" id="lMonth">Last Month</button> -->
+
+                  <p style="float:left;"><input type="text" id="startDatePicker" onchange="selectRange()" placeholder="From" size="30"/></p>
+                  <p id="starttt" style="display:none;"></p>
+                  <p style="float:right;"><input type="text" id="endDatePicker" onchange="selectRange()" placeholder="To" size="30"/></p>
+                  <p id="enddd" style="display:none;"></p>
+                  <button type="button" name="button" id="search">Search</button>
+                  <!-- End Date: <input type="text" id="enddate" size="30"/> -->
+                </div>
+
+                <div class="row">
+                  <div class="tick-stat card">
+                    <h2><i class="fas fa-money-bill-wave"></i></h2>
+                    <h3>Total Revenue</h3>
+                    <h1 id="tico"></h1>
+                  </div>
+                  <div class="tick-stat card">
+                    <h2><i class="fas fa-ticket-alt"></i></h2>
+                    <h3>Sold Tickets</h3>
+                    <h1 id="trips"></h1>
+                  </div>
+                  <div class="tick-stat card">
+                    <h2><i class="fas fa-subway"></i></h2>
+                    <h3>Active Tickets</h3>
+                    <h1 id="acto"></h1>
+                  </div>
+                </div>
+                <div class="container">
+                  <br><br>
+                  <canvas id="myChart-tick-1" style="display:none;"></canvas>
+                  <canvas id="pieChart-tick-1" class="pie-chart" style="display:none;"></canvas>
+                  <canvas id="myChart-tick-2" style="display:none;"></canvas>
+                  <canvas id="pieChart-tick-2" class="pie-chart" style="display:none;"></canvas>
+                  <canvas id="myChart-tick-3" style="display:none;"></canvas>
+                  <canvas id="pieChart-tick-3" class="pie-chart" style="display:none;"></canvas>
+                </div>
+              </div>
+
+              <div class="sub-content report" style="display:none" id="subs">
+                <h2>Subscriptions Statistics</h2>
+                <div class="row">
+                  <div class="tick-stat card">
+                    <h2><i class="fas fa-money-check-alt"></i></h2>
+                    <h3>Active Subs</h3>
+                    <h1 id="subs-num"></h1>
+                  </div>
+                  <div class="tick-stat card">
+                    <h2><i class="fas fa-money-bill-wave"></i></h2>
+                    <h3>Subs Revenue</h3>
+                    <h1 id="subs-revenue"></h1>
+                  </div>
+                  <!-- <div class="tick-stat card">
+                    <h3>Beeeeb</h3>
+                    <h1 id="acto"></h1>
+                  </div> -->
+                </div>
+                <div class="container">
+                  <br><br>
+                  <canvas id="myChart-subs" ></canvas>
+
+                  <!-- <canvas id="pieChart-subs"></canvas> -->
+                </div>
+              </div>
+
+              <div class="users-content report" style="display:none" id="users">
+                <h2>Users Statistics</h2>
+                <div class="row">
+                  <div class="user-stat card">
+                    <h2><i class="fas fa-users"></i></h2>
+                    <h3>Users</h3>
+                    <h1 id="users_num"></h1>
+                  </div>
+                </div>
+                <div class="container">
+                  <br><br>
+                  <canvas id="pieChart-users" ></canvas>
+                </div>
+              </div>
+
+              <div class="stations-content report" style="display:none" id="station">
+                <h2>Stations Statistics</h2>
+                <br>
+                <div class="select-timeDate">
+                  <p style="float:left;"><input type="text" id="typeStation" placeholder="Enter station name"></p>
+
+                  <p style="float:left;"><input type="text" id="timeDate1" onchange="selectTimeDate()" placeholder="From"></p>
+                  <p id="firstTD" style="display:none;"></p>
+
+                  <p style="float:left;"><input type="text" id="timeDate2" onchange="selectTimeDate()" placeholder="To"></p>
+                  <p id="secondTD" style="display:none;"></p>
+
+                </div>
+                <br><br>
+                <button type="button" name="button" id="passengers">Search</button>
+                <br><br>
+                <div class="row">
+                  <div class="user-stat card">
+                    <h2><i class="fas fa-users"></i></h2>
+                    <h3>Visitors</h3>
+                    <h1 id="visitors"></h1>
+                  </div>
+                  <div class="user-stat card">
+                    <h2><i class="fas fa-users"></i></h2>
+                    <h3>Departed</h3>
+                    <h1 id="departed"></h1>
+                  </div>
+                </div>
+              </div>
+
+              <div class="issues-content report" style="display:none" id="issues">
+                <table id="issue-table" class"issue-table">
+                  <caption>Issues List</caption>
+                  <thead>
+                    <th>Num</th>
+                    <th>Issue</th>
+                    <th>Mobile</th>
+                  </thead>
+                  <tbody id="issue-tbody"></tbody>
+                </table>
+              </div>
+
+              <div class="feedbacks-content report" style="display:none" id="feeds">
+                <h2>Feedback Statistics</h2>
+                <div class="row">
+                  <div class="feed-stat card">
+                    <h2><i class="fas fa-star"></i></h2>
+                    <h3>Average Rating</h3>
+                    <h1 id="avg-feed"></h1>
+                  </div>
+                  <div class="feed-stat card">
+                    <h2><i class="fas fa-comment-dots"></i></h2>
+                    <h3>No. Feedbacks</h3>
+                    <h1 id="num-feed"></h1>
+                  </div>
+
+                </div>
+                <div class="container">
+                  <br><br>
+                  <canvas id="myChart-feed" ></canvas>
+                  <br><br>
+                  <table id="table" class"feed-table">
+                    <caption>Feedback List</caption>
+                    <thead>
+                      <th>Num</th>
+                      <th>Feedback</th>
+                      <th>Rating</th>
+                    </thead>
+                    <tbody id="tbody1"></tbody>
+
+                  </table>
+                  <br><br>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function openReport(reportName) {
+        let i;
+        let x = document.getElementsByClassName("report");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        document.getElementById(reportName).style.display = "block";
+      }
+    </script>
+
+    <!-- <script type="text/javascript">
+      let fd = document.getElementById("datepicker");
+      var today = new Date(fd);
+      console.log(today);
+      var t = today.getTime();
+      console.log(t);
+    </script> -->
+
+    <script type="module" src="reports.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      config={
+          enableTime: true,
+          dateFormat: "Y-m-d H:i",
+          altInput: true,
+          altFormat: "F j, Y (h:i K)",
+          onChange: function() {
+            console.log(dayjs(flatpickr).unix())
+          }
+      }
+      flatpickr("input[type=datetime-local]", config);
+
+    </script>
+
+  </body>
+</html>

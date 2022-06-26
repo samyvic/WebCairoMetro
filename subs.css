@@ -1,0 +1,62 @@
+.cover .content .getSubs{
+    color: #fff;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-feature-settings: 'lnum' 1;
+}
+.getSubs .row{
+  width: 100%;
+}
+.getSubs .row:nth-child(1) .sub-box{
+  width:33.33%;
+  display: inline-block;
+  float:left;
+  background-color: #009985;
+  padding: 10px;
+}
+.getSubs .row:nth-child(1) .sub-box span{
+  color:#fff;
+  cursor: pointer;
+}
+.getSubs .subType span{
+  padding: 10px;
+  float:left;
+  display: inline-block;
+  background-color: #00AD95;
+  color:#fff;
+  cursor: pointer;
+}
+.getSubs .subType:nth-child(1) span{
+  width:50%;
+}
+.getSubs .subType:nth-child(2) span{
+  width:25%;
+}
+.getSubs .subType:nth-child(3) span{
+  width:100%;
+}
+.getSubs .public1, .getSubs .senior1,
+ .getSubs .public2, .getSubs .student2,
+ .getSubs .rev2, .getSubs .jorn2,
+ .getSubs .public3{
+  padding: 10px;
+  float:left;
+  display: inline-block;
+  background-color: #00ccb1;
+}
+.getSubs .public1, .getSubs .public2,
+.getSubs .rev2, .getSubs .jorn2{
+  width: 25%;
+}
+.getSubs .senior1{
+  width: 33.33%;
+}
+.getSubs .student2,.getSubs .public3{
+  width: 50%;
+}
+.getSubs .public1 span, .getSubs .senior1 span,
+.getSubs .public2 span, .getSubs .student2 span,
+.getSubs .rev2 span, .getSubs .jorn2 span,
+.getSubs .public3 span{
+  color: #fff;
+}

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stations | Cairo Metro</title>
+    <link rel="stylesheet" href="stations.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+         $(document).ready(function() {
+            $("#addbtn").click(function(){
+               $(".add-station-form").slideToggle(),
+               $(".del-station-form").hide()
+
+
+            });
+            $("#delbtn").click(function(){
+               $(".del-station-form").slideToggle(),
+               $(".add-station-form").hide()
+
+
+            });
+
+         });
+      </script>
+
+
+  </head>
+  <body>
+    <div class="cover">
+      <div class="container">
+        <div class="row">
+          <div class="menu" id="menu">
+            <div class="avatar">
+              <img src="avatar.jpeg" alt="">
+              <p>Admin</p>
+              <h2>SAMY</h2>
+            </div>
+            <ul class="list">
+              <!-- <a href="dashboard.html"><li><i class="fas fa-home"></i> Dashboard</li></a> -->
+              <a href="tickets.html"><li><i class="fas fa-ticket-alt"></i> Tickets</li></a>
+              <li id="active"><i class="fas fa-subway"></i> Stations</li>
+              <a href="subs.html"><li><i class="fas fa-money-check-alt"></i> Subscriptions</li></a>
+              <!-- <a href="tickets.html"><li><i class="fas fa-ticket-alt"></i> Tickets</li></a> -->
+              <!-- <a href="fines.html"><li><i class="fas fa-receipt"></i> Fines</li></a> -->
+              <a href="reports.html"><li><i class="fas fa-chart-pie"></i> Reports</li></a>
+              <a href="index.html"><li><i class="fas fa-sign-out-alt"></i> Log Out</li></a>
+            </ul>
+          </div>
+
+          <div class="content">
+            <h1>Manage <span>Stations</span></h1>
+            <button type="button" name="button" id="addbtn">Add Station</button>
+            <button type="button" name="button" id="delbtn">Remove Station</button>
+            <!-- <button type="button" name="button" id="updbtn">Update Station</button> -->
+            <br>
+            <br>
+            <div class="add-station-form station-form">
+              <form class="addStation">
+
+                <label for="stationName">Station Name</label><br>
+                <input type="text" id="stationName" name="stationName" placeholder="Enter station name" required>
+
+                <br><br>
+                <label for="LineNum">Line Number</label><br>
+                <select id="line" name="line" required>
+                  <option value="1">Line 1</option>
+                  <option value="2">Line 2</option>
+                  <option value="3">Line 3</option>
+                </select>
+
+                <br><br>
+                <label for="stationNum">Number At Line</label><br>
+                <input type="number" min="1" oninput="validity.valid||(value='');" id="numAtLine" name="numAtLine" placeholder="Enter station number at this line" required>
+
+                <br><br>
+                <label for="interchange">Switchable Station</label><br>
+                <!-- <select id="interchangeable" name="interchangeable" onclick="if(this.selectedIndex === 1){dispExch(this.selectedIndex)}else{hideExch(this.selectedIndex)}">
+                  <option [ngValue]="false">false</option>
+                  <option [ngValue]="true">Yes</option>
+                </select> -->
+                <input type="radio" class="interchangeable" name="interchangeable" value="false" onclick="hideExch()"> <span>No</span><br>
+                <input type="radio" class="interchangeable" name="interchangeable" value="true" onclick="dispExch()"> <span>Yes</span>
+
+                <br><br>
+                <label for="exchange">Switchable With Line</label><br>
+                <select id="exchangeable" name="exchangeable" required>
+                  <option value="1">Line 1</option>
+                  <option value="2">Line 2</option>
+                  <option value="3">Line 3</option>
+                </select>
+
+                <br><br>
+                <label for="wheel">Total WheelChairs</label><br>
+                <input type="number" min="0" oninput="validity.valid||(value='');" id="wheelChairs" name="wheelChairs" placeholder="Enter the number of wheelchairs at this station" required>
+
+                <br><br>
+                <input type="submit" value="Add Station" id="addBtn">
+              </form>
+            </div>
+
+            <div class="del-station-form station-form">
+              <form class="deleteForm">
+                <br><br>
+
+                <label for="stationName">Station ID</label><br>
+                <input type="text" id="stationID" name="stationID" placeholder="Enter station ID" required>
+                <br><br>
+                <input type="submit" value="Remove Station" id="delBtn">
+
+
+                <!-- <button type="button" onclick="delstation()">Enter</button> -->
+                <!-- <input type="text" id="commandfield"></input>
+                <button type="button" onclick="enterCommand()">Enter</button> -->
+              </form>
+            </div>
+
+            <br>
+            <br>
+            <hr>
+            <table id="stations-table" class"stations-table">
+              <caption>Stations List</caption>
+              <thead>
+                <th>Station Name</th>
+                <th>Line</th>
+                <th>Num</th>
+                <th>Change</th>
+                <th>WheelChairs</th>
+                <th>ID</th>
+              </thead>
+              <tbody id="stations-tbody">
+              </tbody>
+            </table>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js';
+      import {
+        getFirestore, collection,
+        doc, getDocs, setDoc, addDoc, deleteDoc,
+        deleteField,getDoc,
+        query,where,
+
+      } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
+
+
+      // Follow this pattern to import other Firebase services
+      // import { } from 'firebase/<service>';
+
+      // TODO: Replace the following with your app's Firebase project configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyB4BGSVyzZE1725rn4T1nQuRXSYp6N6MdE",
+        authDomain: "flutter-login-d65de.firebaseapp.com",
+        databaseURL: "https://flutter-login-d65de-default-rtdb.firebaseio.com",
+        projectId: "flutter-login-d65de",
+        storageBucket: "flutter-login-d65de.appspot.com",
+        messagingSenderId: "677870289140",
+        appId: "1:677870289140:web:5236e24ebdac5a4413dea1",
+        measurementId: "G-FCCWWBCY9F"
+      };
+
+      // initialize firebase app
+      const app = initializeApp(firebaseConfig);
+      //init services
+      const db = getFirestore(app);
+      //collection ref
+      const stationsRef = collection(db, 'stations');
+
+
+
+      //Adding document (stations)
+      const addStation = document.querySelector('.addStation'); //to have a reference of that form
+      addStation.addEventListener('submit', async (e) => {
+        e.preventDefault() //prevent the default action which is refreshing the page
+
+        let bool = document.querySelector('.interchangeable').value == "false" ? false:true;
+        console.log(bool);
+        const newDocRef = doc(collection(db, "stations"));
+        await setDoc(
+               newDocRef,
+               {
+                 'name': addStation.stationName.value,
+                 'lineNumber': Number(addStation.line.value),
+                 'numberAtLine': Number(addStation.numAtLine.value),
+                 'isChangable': Boolean(addStation.interchangeable.value === "true"),
+                 // 'exchangeableWithLine': Number(addStation.exchangeable.value),
+                 'totalChairs': Number(addStation.wheelChairs.value),
+                 id: newDocRef.id
+               }
+           )
+           .then(()=>{
+              console.log(addStation.interchangeable.value);
+             addStation.reset();
+             alert("station is added successfully");
+           })
+
+      })
+
+      //get stations collection data
+      let stationsData = [];
+      let totalStations = 0;
+      let stations_tbody = document.getElementById('stations-tbody');
+      //Total Issues
+      try{
+        //get collection data
+        let snapshot = await getDocs(stationsRef);
+
+        snapshot.docs.forEach(doc => {
+          stationsData.push({ ...doc.data(), id: doc.id });
+        });
+
+        totalStations = stationsData.length;
+
+        //order array by lineNumber then by numberAtLine
+        stationsData.sort((a,b) => {
+          if(a.lineNumber === b.lineNumber){
+            return a.numberAtLine - b.numberAtLine;
+          }
+          return a.lineNumber > b.lineNumber ? 1 : -1;
+        })
+
+
+        for(let i=0; i<totalStations; i++){
+
+          let trow = document.createElement("tr");
+          let td1 = document.createElement('td');
+          let td2 = document.createElement('td');
+          let td3 = document.createElement('td');
+          let td4 = document.createElement('td');
+          let td5 = document.createElement('td');
+          let td6 = document.createElement('td');
+
+          td1.innerHTML = stationsData[i].name;
+          td2.innerHTML = stationsData[i].lineNumber;
+          td3.innerHTML = stationsData[i].numberAtLine;
+          if(stationsData[i].exchangeableWithLine > 0){
+            td4.innerHTML = stationsData[i].isChangable + " with line " + stationsData[i].exchangeableWithLine;
+          }else{td4.innerHTML = stationsData[i].isChangable;}
+          // td4.innerHTML = stationsData[i].isChangable;
+          td5.innerHTML = stationsData[i].totalChairs;
+          td6.innerHTML = stationsData[i].id;
+
+          trow.appendChild(td1);
+          trow.appendChild(td2);
+          trow.appendChild(td3);
+          trow.appendChild(td4);
+          trow.appendChild(td5);
+          trow.appendChild(td6);
+
+          stations_tbody.appendChild(trow);
+        }
+
+      }catch(error){
+        console.log(error);
+      }
+
+
+      let flag = 0; //flag = 1 if the station exists
+      const deleteStationForm =  document.querySelector('.deleteForm');
+      deleteStationForm.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const docRef = doc(db, 'stations', deleteStationForm.stationID.value);
+
+        for(let i=0; i<totalStations; i++){
+          if(deleteStationForm.stationID.value === stationsData[i].id){
+            flag = 1;
+          }
+        }
+        if(flag === 1){
+          deleteDoc(docRef)
+          .then(()=>{
+            deleteStationForm.reset();
+            alert("Station is deleted successfully");
+          })
+          .catch(()=>{
+              alert("Unsuccessful operation, error: " + error);
+          });
+        }else{
+          deleteStationForm.reset();
+          alert("This station ID does not exists");
+        }
+
+      })
+
+    </script>
+
+    <script>
+      function dispExch() {
+        document.getElementById("exchangeable").style.display = "block";
+      }
+      function hideExch() {
+        document.getElementById("exchangeable").style.display = "none";
+      }
+    </script>
+
+
+
+
+  </body>
+</html>

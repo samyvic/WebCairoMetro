@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tickets | Cairo Metro</title>
+    <link rel="stylesheet" href="tickets.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+         $(document).ready(function() {
+
+            $("#srchBtn").click(function(){
+               $(".search-user-form").slideToggle()
+            });
+            $("#srchbtn").click(function(){
+              $("#tickets_tbody").children().remove()
+            });
+         });
+      </script>
+
+  </head>
+  <body>
+    <div class="cover">
+      <div class="container">
+        <div class="row">
+          <div class="menu" id="menu">
+            <div class="avatar">
+              <img src="avatar.jpeg" alt="">
+              <p>Admin</p>
+              <h2>SAMY</h2>
+            </div>
+            <ul class="list">
+              <!-- <a href="dashboard.html"><li><i class="fas fa-home"></i> Dashboard</li></a> -->
+              <li id="active"><i class="fas fa-ticket-alt"></i> Tickets</li>
+              <a href="stations.html"><li><i class="fas fa-subway"></i> Stations</li></a>
+              <a href="subs.html"><li><i class="fas fa-money-check-alt"></i> Subscriptions</li></a>
+              <!-- <a href="tickets.html"><li><i class="fas fa-ticket-alt"></i> Tickets</li></a> -->
+              <!-- <a href="fines.html"><li><i class="fas fa-receipt"></i> Fines</li></a> -->
+              <a href="reports.html"><li><i class="fas fa-chart-pie"></i> Reports</li></a>
+              <a href="index.html"><li><i class="fas fa-sign-out-alt"></i> Log Out</li></a>
+            </ul>
+          </div>
+
+          <div class="content">
+            <h1>Manage <span>Tickets</span></h1>
+            <!-- <button type="button" name="button" id="addbtn">Add Station</button> -->
+            <button type="button" name="button" id="srchBtn">Find User</button>
+            <!-- <button type="button" name="button" id="updbtn">Update Station</button> -->
+            <br>
+            <br>
+
+
+            <div class="search-user-form temp-form">
+              <form class="srchForm">
+                <br><br>
+                <label for="stationName">User Phone Number</label><br>
+                <input type="number" id="phoneNum" name="phoneNum" placeholder="Enter Phone Number" required>
+                <br><br>
+                <input type="submit" value="Search" id="srchbtn">
+
+              </form>
+            </div>
+
+            <br>
+            <br>
+            <hr>
+
+
+            <table id="stations-table" class"stations-table">
+              <caption>User Data</caption>
+              <tbody id="stations-tbody">
+                <tr>
+                  <th>User Name</th>
+                  <td id="userName"></td>
+                </tr>
+                <tr>
+                  <th>Age</th>
+                  <td id="userAge"></td>
+                </tr>
+                <tr>
+                  <th>Gender</th>
+                  <td id="userGender"></td>
+                </tr>
+                <tr>
+                  <th>Money</th>
+                  <td id="userMoney"></td>
+                </tr>
+                <tr>
+                  <th>Points</th>
+                  <td id="userPoints"></td>
+                </tr>
+                <tr>
+                  <th>ID</th>
+                  <td id="userId"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button type="button" name="button" id="viewTickets">View Tickets</button>
+
+            <br><br>
+
+            <hr>
+
+            <table id="tickets-table" class"tickets-table">
+              <caption>Tickets List</caption>
+              <thead>
+                <th>No.</th>
+                <th>Status</th>
+                <th>From</th>
+                <th>To</th>
+                <th style="text-transform: none">inTrainPAYG</th>
+                <th style="text-transform: none">createdAt</th>
+                <!-- <th>Stations</th>
+                <th>Price</th> -->
+                <th>Id</th>
+              </thead>
+              <tbody id="tickets_tbody">
+              </tbody>
+            </table>
+
+            <br><br>
+            <hr>
+            <h2 style="text-align:center; color:#5F5F4F; font-size: 26px; text-transform: uppercase;">End Trip</h2>
+            <div class="update-status-form temp-form">
+              <form class="updateForm">
+                <br><br>
+                <label for="ticketId">Update Ticket Status To History</label><br>
+                <input type="text" id="updateTicket" name="updateTicket" placeholder="Enter Ticket ID" required><br>
+                <input type="text" id="getEndStation" name="getEndStation" placeholder="Enter End Station Name" required>
+                <br><br>
+                <input type="submit" value="Update" id="updateBtn">
+              </form>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js';
+      import {
+        getFirestore, collection,
+        doc, getDocs, setDoc, addDoc, deleteDoc,
+        deleteField,getDoc,updateDoc,
+        query,where,orderBy,
+
+      } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
+
+
+      // Follow this pattern to import other Firebase services
+      // import { } from 'firebase/<service>';
+
+      // TODO: Replace the following with your app's Firebase project configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyB4BGSVyzZE1725rn4T1nQuRXSYp6N6MdE",
+        authDomain: "flutter-login-d65de.firebaseapp.com",
+        databaseURL: "https://flutter-login-d65de-default-rtdb.firebaseio.com",
+        projectId: "flutter-login-d65de",
+        storageBucket: "flutter-login-d65de.appspot.com",
+        messagingSenderId: "677870289140",
+        appId: "1:677870289140:web:5236e24ebdac5a4413dea1",
+        measurementId: "G-FCCWWBCY9F"
+      };
+
+      // initialize firebase app
+      const app = initializeApp(firebaseConfig);
+      //init services
+      const db = getFirestore(app);
+      //collection ref
+      const usersRef = collection(db, 'users');
+      const ticketsRef = collection(db, 'tickets');
+
+      const srchForm = document.querySelector('.srchForm'); //to have a reference of that form
+
+      //get stations collection data
+      let usersData = [];
+      let ticketsData = [];
+      let totalUsers = 0;
+      let totalTickets = 0;
+
+      let userName = document.getElementById('userName');
+      let userAge = document.getElementById('userAge');
+      let userGender = document.getElementById('userGender');
+      let userMoney = document.getElementById('userMoney');
+      let userPoints = document.getElementById('userPoints');
+      let userId = document.getElementById('userId');
+
+      let viewTickets = document.getElementById('viewTickets');
+      let ticketsTbody = document.getElementById('tickets_tbody');
+      let tableRows = ticketsTbody.getElementsByTagName('tr');
+      // let rowCount = tableRows.length;
+      let timeDate = "";
+      let c =0;
+
+      srchForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        try{
+          //get collection data
+          let snapshot = await getDocs(usersRef);
+
+          snapshot.docs.forEach(doc => {
+            usersData.push({ ...doc.data(), id: doc.id });
+          });
+
+          totalUsers = usersData.length;
+
+          for(let i=0; i<totalUsers; i++){
+
+            if(("+2"+srchForm.phoneNum.value) === usersData[i].mobile){
+              userName.innerHTML = usersData[i].firstName + " " + usersData[i].lastName;
+              userAge.innerHTML = usersData[i].age;
+              userGender.innerHTML = usersData[i].gender;
+              // if(stationsData[i].exchangeableWithLine > 0){
+              //   td4.innerHTML = stationsData[i].isChangable + " with line " + stationsData[i].exchangeableWithLine;
+              // }else{td4.innerHTML = stationsData[i].isChangable;}
+              userMoney.innerHTML = usersData[i].money;
+              userPoints.innerHTML = usersData[i].points;
+              userId.innerHTML = usersData[i].id;
+
+          }
+        }
+
+        }catch(error){
+          console.log(error);
+        }
+      })
+
+      let snapshot = await getDocs(query(ticketsRef, orderBy('createdAt')));
+
+      snapshot.docs.forEach(doc => {
+        ticketsData.push({ ...doc.data(), id: doc.id });
+      });
+
+      viewTickets.addEventListener('click', async (e) => {
+        e.preventDefault()
+        c=0;
+        try{
+          //get collection data
+
+
+          //order array according to status(active first), then time of creating ticket
+          ticketsData.sort((a,b) => {
+            if(a.status === b.status){
+              return b.createdAt.seconds - a.createdAt.seconds;
+            }
+            return a.status > b.status ? 1 : -1;
+          })
+
+
+
+          totalTickets = ticketsData.length;
+
+          for(let i=0; i<totalTickets; i++){
+            if( userId.innerHTML === ticketsData[i].userId){
+              c++;
+              if(ticketsData[i].endStation){
+                if(ticketsData[i].endStation.name){
+                  function timeConverter(UNIX_timestamp){
+                    var a = new Date(UNIX_timestamp * 1000);
+                    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+                    var year = a.getFullYear();
+                    var month = months[a.getMonth()];
+                    var date = a.getDate();
+                    var hour = a.getHours() - 12;
+                    var min = a.getMinutes();
+                    var sec = a.getSeconds();
+                    var time = date + ' ' + month + ' ' + year + ' ' + hour + 'h:' + min + 'm:' + sec + 's';
+                    return time;
+                  }
+                  timeDate = timeConverter(ticketsData[i].createdAt.seconds);
+                  console.log(ticketsData[i].createdAt);
+                }
+              }
+
+              let trow = document.createElement("tr");
+              let td1 = document.createElement('td');
+              let td2 = document.createElement('td');
+              let td3 = document.createElement('td');
+              let td4 = document.createElement('td');
+              let td5 = document.createElement('td');
+              let td6 = document.createElement('td');
+              let td7 = document.createElement('td');
+              let td8 = document.createElement('td');
+              let td9 = document.createElement('td');
+
+              td1.innerHTML = c;
+              td2.innerHTML = ticketsData[i].status;
+              if(ticketsData[i].startStation != null ){
+                td3.innerHTML = ticketsData[i].startStation.name;
+              }else{
+                td3.innerHTML = "null";
+              }
+              if(ticketsData[i].endStation != null ){
+                td4.innerHTML = ticketsData[i].endStation.name;
+              }else{
+                td4.innerHTML = "null";
+              }
+              td5.innerHTML = Boolean(ticketsData[i].inTrainPAYG);
+              td6.innerHTML = timeDate;
+              if(ticketsData[i].stationsCount != null ){
+                td7.innerHTML = ticketsData[i].stationsCount;
+              }else{
+                td7.innerHTML = "null";
+              }
+              //td7.innerHTML = ticketsData[i].stationsCount;
+              td8.innerHTML = ticketsData[i].price;
+              td9.innerHTML = ticketsData[i].id;
+
+              trow.appendChild(td1);
+              trow.appendChild(td2);
+              trow.appendChild(td3);
+              trow.appendChild(td4);
+              trow.appendChild(td5);
+              trow.appendChild(td6);
+              // trow.appendChild(td7);
+              // trow.appendChild(td8);
+              trow.appendChild(td9);
+
+              ticketsTbody.appendChild(trow);
+
+
+
+              //console.log(c);
+
+          }
+
+        }
+        }catch(error){
+          console.log(error);
+        }
+
+      })
+
+
+      //Update tickets status into History
+      const updateForm = document.querySelector('.updateForm');
+      //const getEndStation = document.getElementById('getEndStation').value;
+      updateForm.addEventListener('submit', (e) =>{
+        e.preventDefault()
+        const updateTicketRef = doc(db, 'tickets', updateForm.updateTicket.value); //reference the form then the name of the input and take the value
+
+        updateDoc(updateTicketRef, {
+          status: 'history',
+          inTrainPAYG: Boolean = false,
+          endStation: {
+            name: updateForm.getEndStation.value,
+          }
+
+        })
+        .then(() =>{
+          updateForm.reset();
+          alert('Ticket status is updated to history');
+
+        })
+
+
+      })
+
+
+    </script>
+
+    <script>
+      function dispExch() {
+        document.getElementById("exchangeable").style.display = "block";
+      }
+      function hideExch() {
+        document.getElementById("exchangeable").style.display = "none";
+      }
+    </script>
+
+
+
+
+
+  </body>
+</html>

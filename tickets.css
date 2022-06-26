@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:0;
+  font-family: 'Raleway', sans-serif;
+  font-feature-settings: 'lnum' 1;
+  /*background:#fff;*/
+  text-align:center;
+  background-color: #ffffe6;
+
+}
+.row{
+  width: 100%;
+}
+.cover .row::after{
+  content:"";
+  clear:both;
+  display:table;
+}
+.cover .box-6{
+  width: 50%;
+  display: block;
+  height: 100vh;
+  float: left;
+
+}
+.cover .box-left{
+  margin: auto;
+  width: 50%;
+  background-color: #ffffe6;
+}
+.cover .box-right{
+  background-color: #00AD95;
+  color: #fff;
+  position: relative;
+
+}
+
+input{
+  display: block;
+  padding: 16px 32px;
+  margin: 20px auto;
+  width: 60%;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  box-shadow: 5px 8px 8px rgb(72 73 121 / 15%);
+}
+
+input[type=submit]{
+  background-color: #00AD95;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cover .box-left h1{
+  font-size: 46px;
+  margin-top: 22%;
+  font-weight: normal;
+  color: #5F5F4F;
+}
+.cover .box-right img{
+  margin: 10% 0 2%;
+  width: 20%;
+}
+.cover .box-right h1{
+  font-size: 46px;
+  font-weight: bolder;
+  margin: 0 0 10%;
+}
+.cover .box-right h2{
+  margin: 21% 0 0;
+  font-size: 22px;
+  font-weight: normal;
+  font-weight: bolder;
+}
+.cover .box-right p{
+  font-weight: normal;
+  margin: 0;
+
+}
+.cover .box-right .footer{
+  position: absolute;
+  text-align: center;
+  bottom: 8%;
+  left: 0;
+  width: 40%;
+  color: #ffffcc;
+  opacity: 0.6;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0 30%;
+}
+.cover .box-right .block{
+  padding: 8px;
+}
+.cover .box-right .footer .b1{
+  width: 50%;
+  border-right: 1px solid rgba(255, 255, 204, .5);
+  float: left;
+}
+
+
+/* start home page */
+.cover .container{
+  background-color: #fff;
+}
+.cover .menu{
+  width: 20%;
+  height: 100vh;
+  background-color: #00AD95;
+  color: white;
+
+  position: fixed;
+  float: left;
+
+  border-top-right-radius: 50px;
+}
+
+.cover .avatar{
+  background-color: #00AD95;
+  padding: 30px 0 20px;
+  border-top-right-radius: 50px;
+  font-weight: bolder;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 230,0.5);
+}
+.cover .avatar img{
+  width: 40%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+.cover .avatar h2{
+  margin: 0;
+}
+.cover ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: justify;
+}
+.cover ul a{
+  text-decoration:none;
+  color: inherit;
+}
+.cover .menu ul li{
+  padding: 10px 50px;
+  cursor: pointer;
+}
+.cover .menu ul li:hover{
+  background-color: #00917C;
+}
+.cover .menu ul li i{
+  padding: 8px;
+}
+.cover .content{
+  background-color: #fff; /* off white */
+  width: 80%;
+  float: right;
+  text-align: justify;
+  padding: 40px 50px;
+}
+.cover .content h1{
+  margin-top: 0;
+}
+.cover .content span{
+  color: grey;
+  font-size: 18px;
+  font-weight: normal;
+}
+.cover .temp-form span{
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+#srchBtn, #viewTickets{
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: #00AD95; /* turquoise */
+  background-color: #fff;
+  border: 3px solid #00AD95;
+  border-radius: 5px;
+}
+#viewTickets{
+  display: flex;
+  margin: 20px auto;
+
+}
+#srchBtn:hover, #viewTickets:hover{
+  background-color: #00AD95; /* red */
+  color: white;
+  border: 3px solid #00AD95;
+}
+
+.cover .menu ul #active{
+  background-color: #fff;
+  color: #00AD95;
+}
+.cover .temp-form{
+  border: 2px solid #00AD95;
+  padding: 10px 80px 30px;
+  background-color: #00AD95;
+}
+.cover .search-user-form{
+  display:none;
+}
+.cover .temp-form label{
+  color: #fff;
+  font-weight: bold;
+}
+.cover .temp-form input[type=text], .cover .temp-form input[type=number], .cover .temp-form select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.cover .temp-form input[type=submit] {
+  width: 25%;
+  background-color: #fff;
+  color: #00AD95;
+  padding: 14px 20px;
+  margin: auto;
+  border: 2px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.cover .temp-form input[type=submit]:hover {
+  background-color: #00AD95;
+  color: #fff;
+}
+.cover select{
+  background: white;
+  cursor: pointer;
+}
+
+.cover select option{
+  background-color: white;
+  cursor: pointer;
+  padding: 8px 16px;
+}
+.cover select option:hover{
+  background-color: #00AD95;
+}
+.cover table{
+  border-collapse: collapse;
+  text-align: center;
+  color: grey;
+  font-weight: bold;
+  width: 100%;
+}
+.cover caption{
+  color: #5F5F4F;
+  font-size: 26px;
+  margin: 20px;
+  text-transform: uppercase;
+}
+.cover table, .cover table td{
+  border: 2px solid #00AD95;
+}
+.cover table th,.cover table td{
+  padding: 20px;
+}
+.cover table th{
+  background-color: #00AD95; /* turquoise */
+  color: #fff; /* off white */
+  border-bottom: 2px solid #fff;
+  text-transform: uppercase;
+}
+#tickets-table th{
+  background-color: #00AD95; /* turquoise */
+  color: #fff; /* off white */
+  border-right: 2px solid #fff;
+  text-transform: uppercase;
+}
+#tickets-table th:last-child{
+  border-right: 2px solid #00AD95;
+}
+#stations-table tr:hover{
+  background-color: rgba(0,0,0,0.1);
+}
+
+#stations-table tr{
+  width:100%;
+}
+#stations-table th{
+  width:30%;
+}
+#stations-table td{
+  width:70%;
+}
+/* end home page */
+
+
+#exchangeable{
+  display: none;
+}
+
+
+/* Radio */
+
+input[type="radio"] {
+    background-color: #ddd;
+    cursor: pointer;
+    display: inline;
+    height: 15px;
+    margin-left: 15px;
+    width: 15px;
+}

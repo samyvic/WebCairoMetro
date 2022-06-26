@@ -1,0 +1,41 @@
+<html>
+
+   <head>
+      <title>jQuery toggle() method</title>
+      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+      <script>
+
+         $(document).ready(function() {
+
+            $("#toggle").click(function(){
+               $(".target").toggle( 'slow', function(){
+                  $(".log").text('Toggle Transition Complete');
+               });
+            });
+         });
+
+      </script>
+
+      <style>
+         p {
+             background-color:#bca;
+             width:200px;
+             border:1px solid green;
+         }
+      </style>
+   </head>
+
+   <body>
+
+      <p>Click on the following button:</p>
+      <button id = "toggle"> Toggle </button>
+
+      <div class = "target">
+         <img src = "../images/jquery.jpg" alt = "jQuery" />
+      </div>
+
+      <div class = "log"></div>
+
+   </body>
+</html>

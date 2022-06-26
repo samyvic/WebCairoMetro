@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+         $(document).ready(function() {
+            $("#addbtn").click(function(){
+               $(".add-station-form").slideToggle(),
+               $(".del-station-form").hide()
+
+
+            });
+            $("#delbtn").click(function(){
+               $(".del-station-form").slideToggle(),
+               $(".add-station-form").hide()
+
+
+            });
+
+         });
+      </script>
+      <script>
+      //remove station
+      // function delstation(){
+      //   //stName = document.getElementById('stationName').value;
+      //   var staID = document.getElementById('stationID');
+      //   // remove(ref(db, 'StationsList/' +stID),{
+      //   //
+      //   // });
+      //   if (staID) {
+      //       var input = staID.value;
+      //       alert(input);
+      //     }
+      // }
+
+
+      // function enterCommand() {
+      //   var field = document.getElementById("commandfield");
+      //   if (field) {
+      //     var input = field.value;
+      //     alert(input);
+      //   }
+      // }
+      </script>
+
+  </head>
+  <body>
+    <div class="cover">
+      <div class="container">
+        <div class="row">
+          <div class="menu" id="menu">
+            <div class="avatar">
+              <img src="avatar.jpeg" alt="">
+              <p>Admin</p>
+              <h2>SAMY</h2>
+            </div>
+            <ul class="list">
+              <li><i class="fas fa-home"></i> Dashboard</li>
+              <li  id="stations"><i class="fas fa-subway"></i> Stations</li>
+              <li><i class="fas fa-money-check-alt"></i> Subscriptions</li>
+              <li id="ticket"><i class="fas fa-ticket-alt"></i> Tickets</li>
+              <li><i class="fas fa-receipt"></i> Fines</li>
+              <li><i class="fas fa-sign-out-alt"></i> Log Out</li>
+            </ul>
+          </div>
+
+          <div class="content">
+            <h1>Manage <span>Stations</span></h1>
+            <button type="button" name="button" id="addbtn">Add Station</button>
+            <button type="button" name="button" id="delbtn">Remove Station</button>
+            <br>
+            <br>
+            <div class="add-station-form station-form">
+              <form>
+
+                <label for="stationName">Station Name</label><br>
+                <input type="text" id="stationName" name="stationName" placeholder="Enter station name">
+
+                <br><br>
+                <label for="stationName">Station ID</label><br>
+                <input type="number" id="stationId" name="stationId">
+
+                <br><br>
+                <label for="LineNum">Line Number</label><br>
+                <select id="line" name="line">
+                  <option value="line1">Line 1</option>
+                  <option value="line2">Line 2</option>
+                  <option value="line3">Line 3</option>
+                </select>
+
+                <br><br>
+                <label for="country">Interchange Station</label><br>
+                <select id="interchange" name="interchange">
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                </select>
+
+                <br><br>
+                <input type="submit" value="Add Station" id="add">
+              </form>
+            </div>
+
+            <div class="del-station-form station-form">
+              <form>
+                <br><br>
+                <label for="stationName">Station ID</label><br>
+                <input type="number" id="stationID" name="stationID">
+                <br><br>
+                <input type="submit" value="Remove Station" id="dele">
+                <!-- <button type="button" onclick="delstation()">Enter</button> -->
+                <!-- <input type="text" id="commandfield"></input>
+                <button type="button" onclick="enterCommand()">Enter</button> -->
+              </form>
+            </div>
+
+            <br>
+            <br>
+            <hr>
+            <br>
+            <table id="table">
+              <thead>
+                <th>#</th>
+                <th>station_name</th>
+                <th>line_no.</th>
+                <th>interchange</th>
+              </thead>
+              <tbody id="tbody1"></tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module">
+
+      var station_id = 0;
+      var tbody = document.getElementById('tbody1');
+
+
+
+      function addStation(station_id,station_name,line_num,interchange){
+        let trow = document.createElement("tr");
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+        let td3 = document.createElement('td');
+        let td4 = document.createElement('td');
+
+        td1.innerHTML = station_id;
+        td2.innerHTML = station_name;
+        td3.innerHTML = line_num;
+        td4.innerHTML = interchange;
+
+        trow.appendChild(td1);
+        trow.appendChild(td2);
+        trow.appendChild(td3);
+        trow.appendChild(td4);
+
+        tbody.appendChild(trow);
+      }
+
+      function addAllStationsToTable(TheStations){
+        station_id = 0;
+        tbody.innerHTML="";
+        TheStations.forEach(element => {
+          addStation(element.StationID, element.StatioName, element.LineNum, element.Interchange);
+        });
+
+      }
+
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-analytics.js";
+      import { getDatabase, set, ref, update, get, child, onValue, remove} from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyB4BGSVyzZE1725rn4T1nQuRXSYp6N6MdE",
+        authDomain: "flutter-login-d65de.firebaseapp.com",
+        databaseURL: "https://flutter-login-d65de-default-rtdb.firebaseio.com",
+        projectId: "flutter-login-d65de",
+        storageBucket: "flutter-login-d65de.appspot.com",
+        messagingSenderId: "677870289140",
+        appId: "1:677870289140:web:5236e24ebdac5a4413dea1",
+        measurementId: "G-FCCWWBCY9F"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const db = getDatabase(app);
+
+      var stID = document.getElementById('stationID');
+      //add station
+      document.getElementById("dele").addEventListener('click',function delstation(){
+        var x = stID.value;
+        remove(ref(db, 'StationsList/' +x), {
+        })
+
+      })
+
+
+
+
+      //add station
+      document.getElementById("add").addEventListener('click',function addstation(stName,stId,lineNum,interchangable){
+
+        stName = document.getElementById('stationName').value;
+        stId = document.getElementById('stationId').value;
+        lineNum = document.getElementById('line').value;
+        interchangable = document.getElementById('interchange').value;
+        set(ref(db, 'StationsList/' +stId), {
+            StationID: stId,
+            StatioName: stName,
+            LineNum: lineNum,
+            Interchange : interchangable,
+        })
+      })
+
+
+
+
+      //remove station
+      //
+      // function delstation(){
+      //   //stName = document.getElementById('stationName').value;
+      //   var staID = document.getElementById('stationID');
+      //   // remove(ref(db, 'StationsList/' +stID),{
+      //   //
+      //   // });
+      //   if (staID) {
+      //       var input = staID.value;
+      //       // remove(ref(db, 'StationsList/' +staID),{
+      //       // });
+      //       alert(input);
+      //     }
+      // }
+
+      // function enterCommand() {
+      //   var field = document.getElementById("commandfield");
+      //   if (field) {
+      //     var input = field.value;
+      //     alert(input);
+      //   }
+      // }
+
+      //get stations table from firebase realtime database
+      function getAllDataOnce(){
+        const dbRef = ref(db);
+
+        get(child(dbRef, "StationsList"))
+        .then((snapshot)=>{
+          var stations = [];
+
+          snapshot.forEach(childSnapshot =>{
+            stations.push(childSnapshot.val());
+          });
+
+          addAllStationsToTable(stations);
+
+        });
+      }
+      window.onload = getAllDataOnce;
+
+
+
+    </script>
+
+
+
+
+  </body>
+</html>
