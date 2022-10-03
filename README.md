@@ -6,7 +6,7 @@ The rush-hour is unpleasant for passengers on public transport. The negative imp
 1. Crowd: in front of the ticket window
 2. Long Queue Time: waiting to buy a ticket
 
-## The Proposed Solution
+## The Proposed System
 An Integrated System composed of a mobile application that help users buying tickets and a web application to allow the management to track tickets, show reports. <br>
 The web application is presented in this repo. 
 
