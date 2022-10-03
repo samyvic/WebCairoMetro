@@ -11,10 +11,10 @@ An Integrated System composed of a mobile application that help users buying tic
 The web application is presented in this repo. 
 
 ## Flow Chart
-![admin-flowchart drawio](https://user-images.githubusercontent.com/47760339/193695275-a6833472-9590-4040-a64a-5207180849ba.png)
+<img src="https://user-images.githubusercontent.com/47760339/193695275-a6833472-9590-4040-a64a-5207180849ba.png" width="448" height="775">
 
 ## Snapshots
-![image](https://user-images.githubusercontent.com/47760339/193696234-966ead52-d6d9-414a-9e9f-c9f29b9be1e4.png | width=50)
+<img src="https://user-images.githubusercontent.com/47760339/193696234-966ead52-d6d9-414a-9e9f-c9f29b9be1e4.png" width="600" height="400">
 ![image](https://user-images.githubusercontent.com/47760339/193696328-29e1eaea-c17c-4ea6-b580-42e45bbd2f67.png)
 ![image](https://user-images.githubusercontent.com/47760339/193696415-bb0bcb1e-3dc8-4891-a77e-3e5e34ed16bb.png)
 
