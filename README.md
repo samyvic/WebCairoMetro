@@ -14,7 +14,7 @@ The web application is presented in this repo.
 ![admin-flowchart drawio](https://user-images.githubusercontent.com/47760339/193695275-a6833472-9590-4040-a64a-5207180849ba.png)
 
 ## Snapshots
-![image](https://user-images.githubusercontent.com/47760339/193696234-966ead52-d6d9-414a-9e9f-c9f29b9be1e4.png)
+![image](https://user-images.githubusercontent.com/47760339/193696234-966ead52-d6d9-414a-9e9f-c9f29b9be1e4.png =448x775)
 ![image](https://user-images.githubusercontent.com/47760339/193696328-29e1eaea-c17c-4ea6-b580-42e45bbd2f67.png)
 ![image](https://user-images.githubusercontent.com/47760339/193696415-bb0bcb1e-3dc8-4891-a77e-3e5e34ed16bb.png)
 
